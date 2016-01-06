@@ -11,8 +11,8 @@
         $('[data-landing-form]').append('<input type="hidden" name="site-id" value="<?= $_GET['siteID'] ?>">');
         $(document).on('submit', '[data-landing-form]', function() {
             var data = $(this).serialize();
-            }$(this).attr('action'), data, function(r) {
-
+            $.post($(this).attr('action'), data, function(r) {
+                console.log(e);
             }, 'jsonp');
             return false;
         });
