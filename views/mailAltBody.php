@@ -1,0 +1,1 @@
+Данные клиента:\n<?php foreach ($this->fields as $field) { ?> <?= $field['name'] ?>:    <?= $field['value'] ?>\n<?php } ?>
