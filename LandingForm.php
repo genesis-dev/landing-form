@@ -15,6 +15,8 @@ class LandingForm {
      */
     public function __construct() {
         $this->config = (include __DIR__ . "/config/main.php");
+        var_dump($_POST);
+        var_dump($this->config);
         $this->database = new Medoo($this->config['db']);
         if (!isset($_POST['site-id']) || !isset($this->config['sites'][$_POST['site-id']]))
             throw new Exception('Unknown resource.');
