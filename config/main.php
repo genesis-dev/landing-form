@@ -21,7 +21,7 @@ $config = [
         "exclude" => [],
     ],
 ];
-$local = include __DIR__."/local.php";
+$local = (include __DIR__."/local.php");
 if (!is_array($local))
     $local = [];
 
