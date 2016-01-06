@@ -59,7 +59,7 @@ class LandingForm {
      * @return number
      */
     public function save() {
-        return $this->database->insert($this->config->table, ["info" => $this->fiedls]);
+        return $this->database->insert($this->config->table, ["data" => $this->fiedls]);
     }
 
     /**
