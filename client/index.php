@@ -3,17 +3,22 @@
     $config = include __DIR__."/../config/local.php";
     if (isset($config['sites'][$_GET['siteID']])):
 ?>
-(function() {
+(function($) {
     var landingForm = {
-        siteID: "<?= $_GET['siteID'] ?>",
-        selector: ".landing-form"
+        siteID: "<?= $_GET['siteID'] ?>"
     };
+    $(document).ready(function() {
+        $('[data-landing-form]').append('<input type="hidden" name="site-id" value="<?= $_GET['siteID'] ?>">');
+        $(document).on('submit', '[data-landing-form]', function() {
+            var data = $(this).serialize();
+            $.post($(this).attr('action'), data, function(r) {
 
-    window.onsubmit = function (e) {
-        console.log(e);
-        return false;
-    }
-})();
+            }, 'json');
+            return false;
+        });
+    });
+
+})(jQuery);
 <?php
     else:
 ?>
