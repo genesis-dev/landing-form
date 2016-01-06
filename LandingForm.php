@@ -21,7 +21,7 @@ class LandingForm {
         if (!isset($_POST['site-id']) || !isset($this->config['sites'][$_POST['site-id']]))
             throw new Exception('Unknown resource.');
         $this->siteID = $_POST['site-id'];
-        $this->siteConfig = array_merge_recursive($this->config['defaults'], $this->config['sites'][$this->siteID]);
+        $this->siteConfig = array_merge($this->config['defaults'], $this->config['sites'][$this->siteID]);
         $this->fiedls = [];
     }
 
