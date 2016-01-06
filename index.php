@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-require __DIR__."LandingForm.php";
+require __DIR__."/LandingForm.php";
 $data = array();
 try {
     $form = new LandingForm();
