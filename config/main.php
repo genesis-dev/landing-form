@@ -8,7 +8,7 @@ $config = [
         'password' => 'your_password',
         'charset' => 'utf8',
     ],
-    "table" => "genesis_requests",
+    "table" => "landing_form",
     "defaults" => [
         "validators" => [
             "email" => function($str, $fields, $validators) {
