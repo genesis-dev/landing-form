@@ -11,6 +11,7 @@
 
     window.onsubmit = function (e) {
         console.log(e);
+        return false;
     }
 })();
 <?php
