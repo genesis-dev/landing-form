@@ -7,12 +7,10 @@ try {
     //$origin = $form->getSiteConfig()['origin'];
     //header("Access-Control-Allow-Origin: http://genesis.kz");
     if ($form->load() && $form->validate()) {
-
         if($form->send())
             $data['success'] = true;
         $form->save();
     } else {
-        $data['valid'] = false;
         $data->errors = $form->errors;
     }
 } catch (Exception $e) {
