@@ -46,6 +46,7 @@ class LandingForm {
             $mail->addAddress($email);
         }
         $mail->Subject = $this->siteConfig['mailer']['subject'];
+        $mail->Body = "Проверка";
         /*ob_start();
         include __DIR__."/views/mailBody.php";
         $mail->Body = ob_get_contents();
