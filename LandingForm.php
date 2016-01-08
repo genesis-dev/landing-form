@@ -62,7 +62,6 @@ class LandingForm {
      * @return number
      */
     public function save() {
-        $this->database->insert("landing_form", ["data" => "123"]);
         return $this->database->insert($this->config["table"], ["data" => "123"]);
     }
 
