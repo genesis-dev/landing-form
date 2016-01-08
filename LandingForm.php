@@ -16,9 +16,9 @@ class LandingForm {
     public function __construct() {
         $this->config = (include __DIR__ . "/config/main.php");
         $this->database = new Medoo($this->config['db']);
-        if (!isset($_POST['site-id']) || !isset($this->config['sites'][$_POST['site-id']]))
+        if (!isset($_GET['site-id']) || !isset($this->config['sites'][$_GET['site-id']]))
             throw new Exception('Unknown resource.');
-        $this->siteID = $_POST['site-id'];
+        $this->siteID = $_GET['site-id'];
         $this->siteConfig = array_merge($this->config['defaults'], $this->config['sites'][$this->siteID]);
         $this->fiedls = [];
     }
@@ -77,11 +77,11 @@ class LandingForm {
      * @return bool
      */
     public function load() {
-        if (isset($_POST[$this->formName]) && is_array($_POST[$this->formName])) {
-            foreach ($_POST[$this->formName] as $key=>$val) {
+        if (isset($_GET[$this->formName]) && is_array($_GET[$this->formName])) {
+            foreach ($_GET[$this->formName] as $key=>$val) {
                 if (!is_array($val))
                     $this->fields[$key] = [
-                        "name" => isset($_POST[$this->formName]['field-names'][$key]) ? $_POST[$this->formName]['field-names'][$key]: $key,
+                        "name" => isset($_GET[$this->formName]['field-names'][$key]) ? $_GET[$this->formName]['field-names'][$key]: $key,
                         "value" => $val,
                     ];
             }

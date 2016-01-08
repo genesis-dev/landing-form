@@ -11,9 +11,15 @@
         $('[data-landing-form]').append('<input type="hidden" name="site-id" value="<?= $_GET['siteID'] ?>">');
         $(document).on('submit', '[data-landing-form]', function() {
             var data = $(this).serialize();
-            $.post($(this).attr('action'), data, function(r) {
-                console.log(r);
-            }, 'jsonp');
+            $.ajax({
+                url: $(this).attr('action'),
+                data: data,
+                dataType: 'jsonp',
+                success: function(r) {
+                    console.log(r);
+                }
+            });
+
             return false;
         });
     });
