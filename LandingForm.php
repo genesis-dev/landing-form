@@ -6,7 +6,7 @@ class LandingForm {
     private $formName = "landing-form";
     private $fields;
     private $database;
-    public $config;
+    private $config;
     private $siteConfig;
     private $siteID;
     public $errors;
@@ -47,14 +47,14 @@ class LandingForm {
         }
         $mail->Subject = $this->siteConfig['mailer']['subject'];
         $mail->Body = "Проверка";
-        /*ob_start();
+        ob_start();
         include __DIR__."/views/mailBody.php";
         $mail->Body = ob_get_contents();
         $mail->isHTML(true);
         ob_clean();
         include __DIR__."/views/mailAltBody.php";
         $mail->AltBody = ob_get_contents();
-        ob_end_flush();*/
+        ob_end_flush();
         return $mail->send();
     }
 
@@ -72,7 +72,7 @@ class LandingForm {
         $this->errors = [];
         foreach($this->fiedls as $key=>$field) {
             if (is_callable($this->siteConfig['validators'][$key]) && !$this->siteConfig['validators'][$key]($field['value'], $this->fields, $this->siteConfig['validators']))
-                $this->errors[] = "Неверно заполнено поле '$field[name]'";
+                $this->errors[] = $key;
         }
         if (!empty($this->errors))
             return false;
@@ -89,9 +89,7 @@ class LandingForm {
                         "value" => $val,
                     ];
             }
-            //return true;
         }
-        //return false;
     }
 
     /**
