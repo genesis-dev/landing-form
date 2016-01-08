@@ -7,6 +7,7 @@ try {
     //$origin = $form->getSiteConfig()['origin'];
     //header("Access-Control-Allow-Origin: http://genesis.kz");
     $form->load();
+    $data['conf'] = $form->getSiteConfig();
     if ($form->validate()) {
         if($form->send())
             $data['success'] = true;
