@@ -78,9 +78,7 @@ class LandingForm {
         return true;
     }
 
-    /**
-     * @return bool
-     */
+
     public function load() {
         if (isset($_GET[$this->formName]) && is_array($_GET[$this->formName])) {
             foreach ($_GET[$this->formName] as $key=>$val) {
@@ -90,9 +88,9 @@ class LandingForm {
                         "value" => $val,
                     ];
             }
-            return true;
+            //return true;
         }
-        return false;
+        //return false;
     }
 
     /**
