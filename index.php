@@ -5,7 +5,7 @@ $data = array("success"=>false);
 try {
     $form = new LandingForm();
     //$origin = $form->getSiteConfig()['origin'];
-    header("Access-Control-Allow-Origin: *");
+    //header("Access-Control-Allow-Origin: http://genesis.kz");
     $form->load();
     $data['conf'] = $form->getSiteConfig();
     if ($form->validate()) {
