@@ -14,8 +14,7 @@ $config = [
                 return !empty($str) && filter_var($str, FILTER_VALIDATE_EMAIL);
             },
             "phone" => function($str, $fields, $validators) {
-                return true;
-                //return !empty($str) && preg_match('/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/', $str);
+                return !empty($str) && preg_match('/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/', $str);
             },
         ],
         "exclude" => [],
