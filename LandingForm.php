@@ -89,4 +89,20 @@ class LandingForm {
         }
         return false;
     }
+
+    /**
+     * @return array
+     */
+    public function getSiteConfig()
+    {
+        return $this->siteConfig;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSiteID()
+    {
+        return $this->siteID;
+    }
 }

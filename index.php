@@ -4,6 +4,8 @@ require __DIR__."/LandingForm.php";
 $data = array();
 try {
     $form = new LandingForm();
+    $origin = $form->getSiteConfig()['origin'];
+    header("Access-Control-Allow-Origin: $_SERVER[HTTP_ORIGIN]");
     $data['success'] = true;
     if ($form->load() && $form->validate()) {
         $form->send();
