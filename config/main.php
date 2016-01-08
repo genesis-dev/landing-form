@@ -25,4 +25,4 @@ $local = (include __DIR__."/local.php");
 if (!is_array($local))
     $local = [];
 
-return $config + $local;
+return array_merge($config, $local);
