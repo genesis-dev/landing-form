@@ -16,5 +16,5 @@ try {
     $data['errors'] = [$e->getMessage()];
 }
 
-echo json_encode($data);
+echo $_GET['callback'] . '(' . json_encode($data) . ')';
 
