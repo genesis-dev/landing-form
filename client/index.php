@@ -12,7 +12,7 @@
         $(document).on('submit', '[data-landing-form]', function() {
             var data = $(this).serialize();
             $.post($(this).attr('action'), data, function(r) {
-                console.log(e);
+                console.log(r);
             }, 'jsonp');
             return false;
         });
