@@ -31,7 +31,7 @@ class LandingForm {
      * @throws phpmailerException
      */
     public function send() {
-        /*$mail = new PHPMailer;
+        $mail = new PHPMailer;
         $mail->CharSet = 'UTF-8';
         $mail->isSMTP();
         $mail->Host = $this->siteConfig['mailer']['host'];
@@ -54,8 +54,7 @@ class LandingForm {
         include __DIR__."/views/mailAltBody.php";
         $mail->AltBody = ob_get_contents();
         ob_end_flush();
-        return $mail->send();*/
-        return true;
+        return $mail->send();
     }
 
     /**
