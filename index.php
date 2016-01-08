@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 require __DIR__."/LandingForm.php";
-$data = array("success"=>false, "get" => $_GET);
+$data = array("success"=>false);
 try {
     $form = new LandingForm();
     //$origin = $form->getSiteConfig()['origin'];
@@ -11,9 +11,7 @@ try {
         if($form->send())
             $data['success'] = true;
         $form->save();
-        $data["valid"] = true;
     } else {
-        $data["valid"] = false;
         $data["errors"] = $form->errors;
     }
 } catch (Exception $e) {
