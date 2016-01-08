@@ -9,6 +9,7 @@ class LandingForm {
     private $config;
     private $siteConfig;
     private $siteID;
+    public $errors;
 
     /**
      * @throws Exception
@@ -21,6 +22,7 @@ class LandingForm {
         $this->siteID = $_GET['site-id'];
         $this->siteConfig = array_merge($this->config['defaults'], $this->config['sites'][$this->siteID]);
         $this->fiedls = [];
+        $this->errors = [];
     }
 
     /**
@@ -66,10 +68,13 @@ class LandingForm {
      * @return bool
      */
     public function validate() {
+        $this->errors = [];
         foreach($this->fiedls as $key=>$field) {
             if (is_callable($this->siteConfig['validators']['key']) && !$this->siteConfig['validators']['key']($field['value'], $this->fields, $this->siteConfig['validators']))
-                return false;
+                $this->errors[] = "Неверно заполнено поле '$field[name]'";
         }
+        if (!empty($this->errors))
+            return false;
         return true;
     }
 
