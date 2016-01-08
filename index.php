@@ -5,7 +5,7 @@ $data = array("foo"=>$_SERVER['HTTP_ORIGIN']);
 try {
     //$form = new LandingForm();
     //$origin = $form->getSiteConfig()['origin'];
-    header("Access-Control-Allow-Origin: $_SERVER[HTTP_ORIGIN]");
+    header("Access-Control-Allow-Origin: http://genesis.kz");
     $data['success'] = true;
     /*if ($form->load() && $form->validate()) {
         $form->send();
