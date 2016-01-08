@@ -6,7 +6,7 @@ class LandingForm {
     private $formName = "landing-form";
     private $fields;
     private $database;
-    private $config;
+    public $config;
     private $siteConfig;
     private $siteID;
     public $errors;
