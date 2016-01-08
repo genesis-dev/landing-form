@@ -20,7 +20,7 @@ class LandingForm {
         if (!isset($_GET['site-id']) || !isset($this->config['sites'][$_GET['site-id']]))
             throw new Exception('Unknown resource.');
         $this->siteID = $_GET['site-id'];
-        $this->siteConfig = array_merge($this->config['defaults'], $this->config['sites'][$this->siteID]);
+        $this->siteConfig = array_merge_recursive($this->config['defaults'], $this->config['sites'][$this->siteID]);
         $this->fiedls = [];
         $this->errors = [];
     }
@@ -71,7 +71,11 @@ class LandingForm {
     public function validate() {
         $this->errors = [];
         foreach($this->fields as $key=>$field) {
-            if (is_callable($this->siteConfig['validators'][$key]))
+            if (is_callable($this->siteConfig['validators'][$key]) &&
+                    !$this->siteConfig['validators'][$key](
+                        $field['value'],
+                        $this->fields,
+                        $this->siteConfig['validators']))
                 $this->errors[] = $key;
         }
         if (!empty($this->errors))
