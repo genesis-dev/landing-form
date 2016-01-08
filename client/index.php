@@ -17,8 +17,7 @@
                 dataType: 'jsonp',
                 success: function(r) {
                     console.log(r);
-                },
-                timeout: 40000
+                }
             });
 
             return false;
