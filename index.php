@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 require __DIR__."/LandingForm.php";
-$data = array("success"=>false);
+$data = array("success"=>false, "get" => $_GET);
 try {
     $form = new LandingForm();
     //$origin = $form->getSiteConfig()['origin'];
