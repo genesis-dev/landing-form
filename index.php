@@ -11,7 +11,7 @@ try {
     if ($form->validate()) {
         if($form->send())
             $data['success'] = true;
-        //$form->save();
+        $form->save();
     } else {
         $data["errors"] = $form->errors;
     }

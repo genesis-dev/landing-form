@@ -1,13 +1,5 @@
 <?php
 $config = [
-    "db" => [
-        'database_type' => 'mysql',
-        'database_name' => 'name',
-        'server' => 'localhost',
-        'username' => 'your_username',
-        'password' => 'your_password',
-        'charset' => 'utf8',
-    ],
     "defaults" => [
         "validators" => [
             "email" => function($str, $fields, $validators) {
