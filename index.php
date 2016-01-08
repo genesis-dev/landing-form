@@ -11,7 +11,7 @@ try {
             $data['success'] = true;
         $form->save();
     } else {
-        $data->errors = $form->errors;
+        $data["errors"] = $form->errors;
     }
 } catch (Exception $e) {
     if (!isset($data['errors']))
