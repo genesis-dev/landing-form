@@ -8,10 +8,12 @@ try {
     //header("Access-Control-Allow-Origin: http://genesis.kz");
     $form->load();
     if ($form->validate()) {
-        if($form->send())
-            $data['success'] = true;
+        //if($form->send())
+            //$data['success'] = true;
         $form->save();
+        $data["valid"] = true;
     } else {
+        $data["valid"] = false;
         $data["errors"] = $form->errors;
     }
 } catch (Exception $e) {
