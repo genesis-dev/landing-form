@@ -8,7 +8,6 @@ $config = [
         'password' => 'your_password',
         'charset' => 'utf8',
     ],
-
     "defaults" => [
         "validators" => [
             "email" => function($str, $fields, $validators) {
@@ -26,4 +25,4 @@ $local = (include __DIR__."/local.php");
 if (!is_array($local))
     $local = [];
 
-return array_merge($config, $local);
+return $config + $local;
