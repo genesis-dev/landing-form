@@ -8,7 +8,7 @@ $config = [
         'password' => 'your_password',
         'charset' => 'utf8',
     ],
-    "table" => "landing_form",
+
     "defaults" => [
         "validators" => [
             "email" => function($str, $fields, $validators) {
@@ -20,6 +20,7 @@ $config = [
         ],
         "exclude" => [],
     ],
+    "table" => "landing_form",
 ];
 $local = (include __DIR__."/local.php");
 if (!is_array($local))
