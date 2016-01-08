@@ -71,8 +71,11 @@ class LandingForm {
     public function validate() {
         $this->errors = [];
         foreach($this->fields as $key=>$field) {
-            if (is_callable($this->siteConfig['validators'][$key]) && !$this->siteConfig['validators'][$key]($field['value'], null, null))
-                $this->errors[] = $key;
+            if (isset($this->siteConfig['validators'][$key])) {
+                $validator = $this->siteConfig['validators'][$key];
+                if (is_callable($validator) && !$validator($field['value'], null, null))
+                    $this->errors[] = $key;
+            }
         }
         if (!empty($this->errors))
             return false;
