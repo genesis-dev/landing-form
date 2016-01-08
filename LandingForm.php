@@ -46,14 +46,14 @@ class LandingForm {
             $mail->addAddress($email);
         }
         $mail->Subject = $this->siteConfig['mailer']['subject'];
-        ob_start();
+        /*ob_start();
         include __DIR__."/views/mailBody.php";
         $mail->Body = ob_get_contents();
         $mail->isHTML(true);
         ob_clean();
         include __DIR__."/views/mailAltBody.php";
         $mail->AltBody = ob_get_contents();
-        ob_end_flush();
+        ob_end_flush();*/
         return $mail->send();
     }
 
