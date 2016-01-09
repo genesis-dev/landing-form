@@ -27,7 +27,8 @@
 <?php
     else:
 ?>
-alert("Invalid siteID <?= $_SERVER['HTTP_ORIGIN'] ?>");
+alert("Invalid siteID");
+console.log(<?= json_encode($_SERVER) ?>);
 <?php
     endif;
 ?>
