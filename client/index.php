@@ -27,7 +27,7 @@
 <?php
     else:
 ?>
-alert("Invalid siteID");
+alert("Invalid siteID <?= $_SERVER['REMOTE_HOST'] ?>");
 <?php
     endif;
 ?>
