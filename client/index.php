@@ -1,7 +1,7 @@
 <?php
     header('Content-Type: application/javascript');
     $config = include __DIR__."/../config/local.php";
-    if (isset($config['sites'][$_GET['siteID']]) || $_SERVER['HTTP_ORIGIN'] == $config['sites'][$_GET['siteID']]['origin']):
+    if (isset($config['sites'][$_GET['siteID']]) && $_SERVER['HTTP_ORIGIN'] == $config['sites'][$_GET['siteID']]['origin']):
 ?>
 (function($) {
     var landingForm = {
