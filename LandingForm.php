@@ -17,7 +17,7 @@ class LandingForm {
     public function __construct() {
         $this->config = (include __DIR__ . "/config/main.php");
         $this->database = new Medoo($this->config['db']);
-        if (!isset($_GET['siteID']) || !isset($this->config['sites'][$_GET['siteID']]) || $_SERVER['REMOTE_HOST'] != $this->config['sites'][$_GET['siteID']]['host'])
+        if (!isset($_GET['siteID']) || !isset($this->config['sites'][$_GET['siteID']]))
             throw new Exception('Unknown resource.');
         $this->siteID = (string)$_GET['siteID'];
         $this->siteConfig = array_merge_recursive($this->config['defaults'], $this->config['sites'][$this->siteID]);
