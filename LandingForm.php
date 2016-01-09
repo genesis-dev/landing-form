@@ -3,7 +3,7 @@ require __DIR__.'/lib/PHPMailerAutoload.php';
 require __DIR__.'/lib/medoo.php';
 
 class LandingForm {
-    private $formName = "landing-form";
+    private $formName = "landingForm";
     private $fields;
     private $database;
     private $config;
@@ -17,9 +17,9 @@ class LandingForm {
     public function __construct() {
         $this->config = (include __DIR__ . "/config/main.php");
         $this->database = new Medoo($this->config['db']);
-        if (!isset($_GET['site-id']) || !isset($this->config['sites'][$_GET['site-id']]))
+        if (!isset($_GET['siteID']) || !isset($this->config['sites'][$_GET['siteID']]) || $_SERVER['REMOTE_HOST'] != $this->config['sites'][$_GET['siteID']]['host'])
             throw new Exception('Unknown resource.');
-        $this->siteID = $_GET['site-id'];
+        $this->siteID = (string)$_GET['siteID'];
         $this->siteConfig = array_merge_recursive($this->config['defaults'], $this->config['sites'][$this->siteID]);
         $this->fiedls = [];
         $this->errors = [];
@@ -82,17 +82,23 @@ class LandingForm {
         return true;
     }
 
-
+    /**
+     * @return bool
+     */
     public function load() {
         if (isset($_GET[$this->formName]) && is_array($_GET[$this->formName])) {
             foreach ($_GET[$this->formName] as $key=>$val) {
                 if (!is_array($val))
                     $this->fields[$key] = [
-                        "name" => isset($_GET[$this->formName]['field-names'][$key]) ? $_GET[$this->formName]['field-names'][$key]: $key,
+                        "name" => isset($_GET[$this->formName]['fieldNames'][$key]) ? $_GET[$this->formName]['fieldNames'][$key]: $key,
                         "value" => $val,
                     ];
             }
         }
+
+        if (!empty($this->fields))
+            return true;
+        return false;
     }
 
     /**
@@ -104,7 +110,7 @@ class LandingForm {
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getSiteID()
     {

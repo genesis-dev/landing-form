@@ -1,14 +1,14 @@
 <?php
     header('Content-Type: application/javascript');
     $config = include __DIR__."/../config/local.php";
-    if (isset($config['sites'][$_GET['siteID']])):
+    if (isset($config['sites'][$_GET['siteID']]) && $config['sites'][$_GET['siteID']]['host'] == $_SERVER['REMOTE_HOST']):
 ?>
 (function($) {
     var landingForm = {
         siteID: "<?= $_GET['siteID'] ?>"
     };
     $(document).ready(function() {
-        $('[data-landing-form]').append('<input type="hidden" name="site-id" value="<?= $_GET['siteID'] ?>">');
+        $('[data-landing-form]').append('<input type="hidden" name="siteID" value="<?= $_GET['siteID'] ?>">');
         $(document).on('submit', '[data-landing-form]', function() {
             var data = $(this).serialize();
             $.ajax({
@@ -23,7 +23,6 @@
             return false;
         });
     });
-
 })(jQuery);
 <?php
     else:

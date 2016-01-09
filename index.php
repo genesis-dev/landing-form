@@ -1,13 +1,10 @@
 <?php
-header('Content-Type: application/json');
+header('Content-Type: application/javascript');
 require __DIR__."/LandingForm.php";
 $data = array("success"=>false);
 try {
     $form = new LandingForm();
-    //$origin = $form->getSiteConfig()['origin'];
-    //header("Access-Control-Allow-Origin: http://genesis.kz");
     $form->load();
-    $data['conf'] = $form->getSiteConfig();
     if ($form->validate()) {
         if($form->send())
             $data['success'] = true;
@@ -22,4 +19,3 @@ try {
 }
 
 echo $_GET['callback'] . '(' . json_encode($data) . ')';
-
