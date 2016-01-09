@@ -5,7 +5,6 @@ $data = array("success"=>false);
 try {
     $form = new LandingForm();
     $form->load();
-    $data["conf"] = $form->getSiteConfig();
     if ($form->validate()) {
         if($form->send())
             $data['success'] = true;
