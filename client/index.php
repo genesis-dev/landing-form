@@ -1,7 +1,7 @@
 <?php
     header('Content-Type: application/javascript');
     $config = include __DIR__."/../config/local.php";
-    if (isset($config['sites'][$_GET['siteID']]) && $config['sites'][$_GET['siteID']]['host'] == $_SERVER['REMOTE_HOST']):
+    if (isset($config['sites'][$_GET['siteID']]) || !isset($_SERVER['HTTP_ORIGIN']) || $_SERVER['HTTP_ORIGIN'] == $config['sites'][$_GET['siteID']]['origin']):
 ?>
 (function($) {
     var landingForm = {
@@ -27,7 +27,7 @@
 <?php
     else:
 ?>
-alert("Invalid siteID <?= $_SERVER['REMOTE_ADDR'] ?>");
+alert("Invalid siteID <?= $_SERVER['HTTP_ORIGIN'] ?>");
 <?php
     endif;
 ?>
