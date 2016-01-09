@@ -20,7 +20,7 @@ class LandingForm {
         if (!isset($_GET['siteID']) || !isset($this->config['sites'][$_GET['siteID']]))
             throw new Exception('Unknown resource.');
         $this->siteID = (string)$_GET['siteID'];
-        $this->siteConfig = array_merge_recursive($this->config['defaults'], $this->config['sites'][$this->siteID]);
+        $this->siteConfig = array_replace_recursive($this->config['defaults'], $this->config['sites'][$this->siteID]);
         $this->fiedls = [];
         $this->errors = [];
     }
