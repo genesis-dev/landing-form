@@ -5,6 +5,7 @@ $data = array("success"=>false);
 try {
     $form = new LandingForm();
     $form->load();
+    $data['updates']=$form->sendTelegram();
     if ($form->validate()) {
         if($form->send())
             $data['success'] = true;
