@@ -1,5 +1,4 @@
 <?php
-require "../LandingForm.php";
 class LandingFormTest extends PHPUnit_Framework_TestCase
 {
     /**
