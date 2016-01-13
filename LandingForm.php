@@ -64,7 +64,7 @@ class LandingForm {
         include __DIR__."/views/telegram.php";
         $text = urlencode(ob_get_contents());
         ob_end_clean();
-        $url = "https://api.telegram.org/bot$api_key/sendMessage?text=$text&chat_id=@genesis_orders";
+        $url = "https://api.telegram.org/bot$api_key/sendMessage?text=$text&chat_id=@genesis_orders&parse_mode=Markdown";
         $handle = curl_init($url);
         curl_setopt ($handle, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($handle);
