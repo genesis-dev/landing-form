@@ -28,4 +28,14 @@ class LandingFormTest extends PHPUnit_Framework_TestCase
         $invalid_form->load();
         $this->assertFalse($invalid_form->validate());
     }
+
+    public function testSendAndSave() {
+        $_GET['siteID'] = "h9apn";
+        $_GET['landingForm']['email'] = 'glmeist@gmail.com';
+        $_GET['landingForm']['phone'] = '+77012240824';
+        $valid_form = new LandingForm();
+        $valid_form->load();
+        $this->assertTrue( $valid_form->send());
+        $this->assertGreaterThan(0, $valid_form->save());
+    }
 }
