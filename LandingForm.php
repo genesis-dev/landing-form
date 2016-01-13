@@ -46,7 +46,7 @@ class LandingForm {
             $mail->addAddress($email);
         }
         $mail->Subject = $this->siteConfig['mailer']['subject'];
-        $mail->Body = "Ïðîâåðêà";
+        $mail->Body = "ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ°";
         ob_start();
         include __DIR__."/views/mailBody.php";
         $mail->Body = ob_get_contents();
