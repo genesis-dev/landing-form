@@ -61,7 +61,7 @@ class LandingForm {
     public function sendTelegram() {
         $api_key = $this->config["telegram"]["api_key"];
         ob_start();
-        include __DIR__."/views/mailAltBody.php";
+        include __DIR__."/views/telegram.php";
         $text = ob_get_contents();
         ob_end_clean();
         $url = "https://api.telegram.org/bot$api_key/sendMessage?text=$text&chat_id=@genesis_orders";
