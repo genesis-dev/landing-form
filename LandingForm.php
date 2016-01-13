@@ -61,7 +61,8 @@ class LandingForm {
     public function sendTelegram() {
         $api_key = $this->config["telegram"]["api_key"];
         $url = "https://api.telegram.org/bot$api_key/getUpdates";
-        return "sf";
+        $handle = curl_init($url);
+        return $this->exec_curl_request($handle);
     }
 
     private function exec_curl_request($handle) {
