@@ -2,7 +2,7 @@
 header('Content-Type: application/javascript');
 define('DEBUG', true);
 require __DIR__."/LandingForm.php";
-$data = array("success"=>false);
+$data = array("success"=>false, "errors" => []);
 try {
     $form = new LandingForm();
     $form->load();
@@ -19,8 +19,6 @@ try {
     }
     $data["errors"] = array_merge($data["errors"], $form->getErrors());
 } catch (Exception $e) {
-    if (!isset($data['errors']))
-        $data['errors'] = [];
     $data['errors'][] = $e->getMessage();
 }
 
