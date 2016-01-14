@@ -30,7 +30,7 @@ class LandingFormTest extends PHPUnit_Framework_TestCase
     }
 
     public function testSendAndSave() {
-        $tests = ["test_null"/*, "test_mail", "test_telegram", "test_all"*/];
+        $tests = ["test_null", "test_mail", "test_telegram", "test_all"];
         foreach ($tests as $test) {
             $_GET['siteID'] = $test;
             $_GET['landingForm']['email'] = 'glmeist@gmail.com';
@@ -43,6 +43,7 @@ class LandingFormTest extends PHPUnit_Framework_TestCase
             else
                 $this->assertNull($valid_form->send());
             $this->assertGreaterThan(0, $valid_form->save());
+            unset($valid_form);
         }
     }
 
