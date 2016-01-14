@@ -16,7 +16,9 @@
                 data: data,
                 dataType: 'jsonp',
                 success: function(r) {
-                    console.log(r);
+                    <?php if (!empty($_GET['success_callback'])): ?>
+                        <?= $_GET['success_callback'] ?>(r);
+                    <?php endif; ?>
                 }
             });
 
