@@ -36,34 +36,36 @@ class LandingForm {
      * @throws phpmailerException
      */
     public function send() {
-        $mail = new PHPMailer;
-        $mail->CharSet = 'UTF-8';
-        $mail->isSMTP();
-        $mail->Host = $this->siteConfig['mailer']['host'];
-        $mail->SMTPAuth = true;
-        $mail->Username = $this->siteConfig['mailer']['username'];
-        $mail->Password = $this->siteConfig['mailer']['password'];
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port = 465;
-        $mail->From = $this->siteConfig['mailer']['from'];
-        $mail->FromName = $this->siteConfig['mailer']['fromName'];
-        foreach ($this->siteConfig['mailer']['to'] as $email) {
-            $mail->addAddress($email);
+        if ($this->siteConfig['mailer'] !== false) {
+            $mail = new PHPMailer;
+            $mail->CharSet = 'UTF-8';
+            $mail->isSMTP();
+            $mail->Host = $this->siteConfig['mailer']['host'];
+            $mail->SMTPAuth = true;
+            $mail->Username = $this->siteConfig['mailer']['username'];
+            $mail->Password = $this->siteConfig['mailer']['password'];
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port = 465;
+            $mail->From = $this->siteConfig['mailer']['from'];
+            $mail->FromName = $this->siteConfig['mailer']['fromName'];
+            foreach ($this->siteConfig['mailer']['to'] as $email) {
+                $mail->addAddress($email);
+            }
+            $mail->Subject = $this->siteConfig['mailer']['subject'];
+            ob_start();
+            include __DIR__ . "/views/mailBody.php";
+            $mail->Body = ob_get_contents();
+            $mail->isHTML(true);
+            ob_clean();
+            include __DIR__ . "/views/mailAltBody.php";
+            $mail->AltBody = ob_get_contents();
+            ob_end_clean();
+            if ($mail->send())
+                return true;
+            else
+                $this['errors'][] = $mail->ErrorInfo;
+            return false;
         }
-        $mail->Subject = $this->siteConfig['mailer']['subject'];
-        ob_start();
-        include __DIR__."/views/mailBody.php";
-        $mail->Body = ob_get_contents();
-        $mail->isHTML(true);
-        ob_clean();
-        include __DIR__."/views/mailAltBody.php";
-        $mail->AltBody = ob_get_contents();
-        ob_end_clean();
-        if ($mail->send())
-            return true;
-        else
-            $this['errors'][] = $mail->ErrorInfo;
-        return false;
     }
 
     /**

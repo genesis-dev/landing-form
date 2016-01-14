@@ -9,11 +9,11 @@ try {
     if ($form->validate()) {
         if($form->send())
             $data['success'] = true;
-        $form->save();
+        $email = $form->save();
         $telegram = $form->sendTelegram();
         if (DEBUG) {
             $data['telegram'] = $telegram;
-
+            $data['email'] = $email;
         }
     }
     $data["errors"] = array_merge($data["errors"], $form->errors);
