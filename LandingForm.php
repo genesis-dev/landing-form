@@ -16,13 +16,18 @@ class LandingForm {
      */
     public function __construct() {
         $this->config = (include __DIR__ . "/config/main.php");
-        $this->database = new Medoo($this->config['db']);
+        $this->errors = [];
         if (!isset($_GET['siteID']) || !isset($this->config['sites'][$_GET['siteID']]))
             throw new Exception('Unknown resource.');
+        try {
+            $this->database = new Medoo($this->config['db']);
+        } catch (Exception $e) {
+            $this->errors[] = $e->getMessage();
+            $this->errors["database"] = $this->database;
+        }
         $this->siteID = (string)$_GET['siteID'];
         $this->siteConfig = array_replace_recursive($this->config['defaults'], $this->config['sites'][$this->siteID]);
         $this->fiedls = [];
-        $this->errors = [];
     }
 
     /**
@@ -46,7 +51,6 @@ class LandingForm {
             $mail->addAddress($email);
         }
         $mail->Subject = $this->siteConfig['mailer']['subject'];
-        $mail->Body = "Проверка";
         ob_start();
         include __DIR__."/views/mailBody.php";
         $mail->Body = ob_get_contents();
@@ -55,22 +59,34 @@ class LandingForm {
         include __DIR__."/views/mailAltBody.php";
         $mail->AltBody = ob_get_contents();
         ob_end_clean();
-        return $mail->send();
+        if ($mail->send())
+            return true;
+        else
+            $this['errors'][] = $mail->ErrorInfo;
+        return false;
     }
 
+    /**
+     * @return mixed
+     */
     public function sendTelegram() {
-        $api_key = $this->config["telegram"]["api_key"];
-        ob_start();
-        include __DIR__."/views/telegram.php";
-        $text = urlencode(ob_get_contents());
-        ob_end_clean();
-        $channel = $this->siteConfig["telegram"]["channel_name"];
-        $url = "https://api.telegram.org/bot$api_key/sendMessage?text=$text&chat_id=@$channel&parse_mode=Markdown";
-        $handle = curl_init($url);
-        curl_setopt ($handle, CURLOPT_RETURNTRANSFER, 1);
-        $response = curl_exec($handle);
-        curl_close($handle);
-        return $response;
+        if (isset($this->config["telegram"]["api_key"]) && isset($this->siteConfig["telegram"]["channel_name"])) {
+            $api_key = $this->config["telegram"]["api_key"];
+            ob_start();
+            include __DIR__ . "/views/telegram.php";
+            $text = urlencode(ob_get_contents());
+            ob_end_clean();
+            $channel = $this->siteConfig["telegram"]["channel_name"];
+            $url = "https://api.telegram.org/bot$api_key/sendMessage?text=$text&chat_id=@$channel&parse_mode=Markdown";
+            $handle = curl_init($url);
+            curl_setopt($handle, CURLOPT_RETURNTRANSFER, 1);
+            $response = curl_exec($handle);
+            curl_close($handle);
+            if ($response !== false)
+                return json_decode($response);
+        }
+
+        return false;
     }
 
     /**
