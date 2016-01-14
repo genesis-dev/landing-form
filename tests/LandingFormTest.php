@@ -61,6 +61,7 @@ class LandingFormTest extends PHPUnit_Framework_TestCase
                 $this->assertTrue($telegram->ok);
             } else
                 $this->assertNull($valid_form->sendTelegram());
+            unset($valid_form);
         }
     }
 }
