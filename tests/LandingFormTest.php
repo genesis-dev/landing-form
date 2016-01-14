@@ -55,7 +55,7 @@ class LandingFormTest extends PHPUnit_Framework_TestCase
             $_GET['landingForm']['fieldNames']['phone'] = "Телефон";
             $valid_form = new LandingForm();
             $valid_form->load();
-            if (isset($valid_form->siteConfig()["telegram"]["channel_name"])) {
+            if (isset($valid_form->getSiteConfig()["telegram"]["channel_name"])) {
                 $telegram = $valid_form->sendTelegram();
                 $this->assertTrue($telegram->ok);
             } else
