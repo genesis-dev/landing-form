@@ -17,7 +17,7 @@ try {
             $data['database'] = $database;
         }
     }
-    $data["errors"] = array_merge($data["errors"], $form->errors);
+    $data["errors"] = array_merge($data["errors"], $form->getErrors());
 } catch (Exception $e) {
     if (!isset($data['errors']))
         $data['errors'] = [];

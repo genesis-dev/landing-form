@@ -9,7 +9,7 @@ class LandingForm {
     private $config;
     private $siteConfig;
     private $siteID;
-    public $errors;
+    private $errors;
 
     /**
      * @throws Exception
@@ -102,7 +102,7 @@ class LandingForm {
      * @return bool
      */
     public function validate() {
-        $this->errors = [];
+        $this->errors["validator"] = [];
         foreach($this->fields as $key=>$field) {
             if (isset($this->siteConfig['validators'][$key])) {
                 $validator = $this->siteConfig['validators'][$key];
@@ -149,5 +149,13 @@ class LandingForm {
     public function getSiteID()
     {
         return $this->siteID;
+    }
+
+    /**
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
     }
 }
