@@ -93,7 +93,9 @@ class LandingForm {
      * @return number
      */
     public function save() {
-        return $this->database;//->insert($this->config["table"], ["data" => $this->fields]);
+        if (is_null($this->database))
+            return;
+        return $this->database->insert($this->config["table"], ["data" => $this->fields]);
     }
 
     /**
