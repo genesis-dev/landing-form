@@ -1,1 +1,1 @@
-Данные клиента:\n<?php foreach ($this->fields as $field) { ?> <?= $field['name'] ?>:    <?= $field['value'] ?>\n<?php } ?>
+Данные клиента:\n<?php foreach ($this->fields as $field) if ((isset($this->siteConfig["include"]) && in_array($field["key"], $this->siteConfig["include"])) || !isset($this->siteConfig["include"])) { ?> <?= $field['name'] ?>:    <?= $field['value'] ?>\n<?php } ?>

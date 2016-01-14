@@ -94,8 +94,8 @@ class LandingForm {
      */
     public function save() {
         if (is_null($this->database))
-            return;
-        return $this->database->insert($this->config["table"], ["data" => $this->fields]);
+            return null;
+        return $this->database->insert($this->config["table"], ["data" => $this->fields, "site_id" => $this->siteID]);
     }
 
     /**
@@ -124,6 +124,7 @@ class LandingForm {
                 if (!is_array($val))
                     $this->fields[$key] = [
                         "name" => isset($_GET[$this->formName]['fieldNames'][$key]) ? $_GET[$this->formName]['fieldNames'][$key]: $key,
+                        "key" => $key,
                         "value" => $val,
                     ];
             }
