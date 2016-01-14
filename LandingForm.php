@@ -23,7 +23,6 @@ class LandingForm {
             $this->database = new Medoo($this->config['db']);
         } catch (Exception $e) {
             $this->errors[] = $e->getMessage();
-            $this->errors["database"] = $this->database;
         }
         $this->siteID = (string)$_GET['siteID'];
         $this->siteConfig = array_replace_recursive($this->config['defaults'], $this->config['sites'][$this->siteID]);
@@ -86,16 +85,15 @@ class LandingForm {
             curl_close($handle);
             if ($response !== false)
                 return json_decode($response);
+            return false;
         }
-
-        return false;
     }
 
     /**
      * @return number
      */
     public function save() {
-        //return $this->database->insert($this->config["table"], ["data" => $this->fields]);
+        return $this->database;//->insert($this->config["table"], ["data" => $this->fields]);
     }
 
     /**

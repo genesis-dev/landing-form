@@ -7,13 +7,14 @@ try {
     $form = new LandingForm();
     $form->load();
     if ($form->validate()) {
-        if($form->send())
-            $data['success'] = true;
-        $email = $form->save();
+        $email = $form->send();
+        $database = $form->save();
         $telegram = $form->sendTelegram();
+        $data['success'] = true;
         if (DEBUG) {
             $data['telegram'] = $telegram;
             $data['email'] = $email;
+            $data['database'] = $database;
         }
     }
     $data["errors"] = array_merge($data["errors"], $form->errors);
