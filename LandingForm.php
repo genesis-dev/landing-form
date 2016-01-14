@@ -124,7 +124,6 @@ class LandingForm {
                 if (!is_array($val))
                     $this->fields[$key] = [
                         "name" => isset($_GET[$this->formName]['fieldNames'][$key]) ? $_GET[$this->formName]['fieldNames'][$key]: $key,
-                        "key" => $key,
                         "value" => $val,
                     ];
             }
