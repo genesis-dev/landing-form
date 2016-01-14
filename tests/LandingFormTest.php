@@ -35,7 +35,7 @@ class LandingFormTest extends PHPUnit_Framework_TestCase
             $_GET['siteID'] = $test;
             $_GET['landingForm']['email'] = 'glmeist@gmail.com';
             $_GET['landingForm']['phone'] = '+77012240824';
-            $_GET['landingForm']['fieldNames']['phone'] = "Òåëåôîí";
+            $_GET['landingForm']['fieldNames']['phone'] = "Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½";
             $valid_form = new LandingForm();
             $valid_form->load();
             if ($valid_form->getSiteConfig()['mailer'] !== false)
@@ -53,7 +53,7 @@ class LandingFormTest extends PHPUnit_Framework_TestCase
             $_GET['siteID'] = $test;
             $_GET['landingForm']['email'] = 'glmeist@gmail.com';
             $_GET['landingForm']['phone'] = '+77012240824';
-            $_GET['landingForm']['fieldNames']['phone'] = "Òåëåôîí";
+            $_GET['landingForm']['fieldNames']['phone'] = "Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½";
             $valid_form = new LandingForm();
             $valid_form->load();
             if (isset($valid_form->getSiteConfig()["telegram"]["channel_name"])) {
