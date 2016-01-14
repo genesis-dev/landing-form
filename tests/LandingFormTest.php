@@ -12,7 +12,7 @@ class LandingFormTest extends PHPUnit_Framework_TestCase
     }
 
     public function testValidateEmailAndPhone() {
-        $_GET['siteID'] = "h9apn";
+        $_GET['siteID'] = "test_all";
         $_GET['landingForm']['email'] = 'glmeist@gmail.com';
         $_GET['landingForm']['phone'] = '+77012240824';
         $valid_form = new LandingForm();
@@ -30,12 +30,36 @@ class LandingFormTest extends PHPUnit_Framework_TestCase
     }
 
     public function testSendAndSave() {
-        $_GET['siteID'] = "h9apn";
-        $_GET['landingForm']['email'] = 'glmeist@gmail.com';
-        $_GET['landingForm']['phone'] = '+77012240824';
-        $valid_form = new LandingForm();
-        $valid_form->load();
-        $this->assertTrue( $valid_form->send());
-        $this->assertGreaterThan(0, $valid_form->save());
+        $tests = ["test_null", "test_mail", "test_telegram", "test_all"];
+        foreach ($tests as $test) {
+            $_GET['siteID'] = $test;
+            $_GET['landingForm']['email'] = 'glmeist@gmail.com';
+            $_GET['landingForm']['phone'] = '+77012240824';
+            $_GET['landingForm']['fieldNames']['phone'] = "Телефон";
+            $valid_form = new LandingForm();
+            $valid_form->load();
+            if ($valid_form->getSiteConfig()['mailer'] !== false)
+                $this->assertTrue($valid_form->send());
+            else
+                $this->assertNull($valid_form->send());
+            $this->assertGreaterThan(0, $valid_form->save());
+        }
+    }
+
+    public function testSendTelegram() {
+        $tests = ["test_null", "test_mail", "test_telegram", "test_all"];
+        foreach ($tests as $test) {
+            $_GET['siteID'] = $test;
+            $_GET['landingForm']['email'] = 'glmeist@gmail.com';
+            $_GET['landingForm']['phone'] = '+77012240824';
+            $_GET['landingForm']['fieldNames']['phone'] = "Телефон";
+            $valid_form = new LandingForm();
+            $valid_form->load();
+            if (isset($valid_form->siteConfig()["telegram"]["channel_name"])) {
+                $telegram = $valid_form->sendTelegram();
+                $this->assertTrue($telegram->ok);
+            } else
+                $this->assertNull($valid_form->sendTelegram());
+        }
     }
 }
