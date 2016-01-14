@@ -2,7 +2,7 @@
 header('Content-Type: application/javascript');
 define('DEBUG', true);
 require __DIR__."/LandingForm.php";
-$data = array("success"=>false, "errors" => []);
+$data = ["success"=>false, "errors" => []];
 try {
     $form = new LandingForm();
     $form->load();

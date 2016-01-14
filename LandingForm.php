@@ -110,7 +110,7 @@ class LandingForm {
                     $this->errors["validator"][] = $key;
             }
         }
-        if (!empty($this->errors))
+        if (!empty($this->errors["validator"]))
             return false;
         return true;
     }
