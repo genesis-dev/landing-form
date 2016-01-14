@@ -112,6 +112,7 @@ class LandingForm {
         }
         if (!empty($this->errors["validator"]))
             return false;
+        unset($this->errors["validator"]);
         return true;
     }
 
