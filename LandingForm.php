@@ -1,6 +1,5 @@
 <?php
-require __DIR__.'/lib/PHPMailerAutoload.php';
-require __DIR__.'/lib/medoo.php';
+require __DIR__.'/vendor/autoload.php';
 
 class LandingForm {
     private $formName = "landingForm";
