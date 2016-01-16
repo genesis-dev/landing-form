@@ -11,5 +11,11 @@
             "email": "e@genesis.kz"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/genesis-dev/landing-form.git"
+        }
+    ],
     "minimum-stability": "alpha"
 }
