@@ -108,7 +108,10 @@ class LandingForm {
             return false;
         }
 
+
+
         foreach($this->fields as $key=>$field) {
+
             if (isset($this->siteConfig['validators'][$key])) {
                 $validator = $this->siteConfig['validators'][$key];
                 if (is_callable($validator) && !$validator($field['value'], $this->fields, $this->siteConfig["validators"]))
