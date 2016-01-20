@@ -11,7 +11,7 @@ class LandingFormTest extends PHPUnit_Framework_TestCase
         $form = new LandingForm();
     }
 
-    public function testValidateEmailAndPhone() {
+    public function testValidate() {
         $_GET['siteID'] = "test_all";
         $_GET['landingForm']['email'] = 'glmeist@gmail.com';
         $_GET['landingForm']['phone'] = '+77012240824';
@@ -27,6 +27,23 @@ class LandingFormTest extends PHPUnit_Framework_TestCase
         $invalid_form = new LandingForm();
         $invalid_form->load();
         $this->assertFalse($invalid_form->validate());
+        unset($_GET['landingForm']);
+        $empty_form = new LandingForm();
+        $empty_form->load();
+        $this->assertFalse($empty_form->validate());
+        $_GET['landingForm']['name'] = 'Name';
+        $invalid_form2 = new LandingForm();
+        $invalid_form2->load();
+        $this->assertFalse($invalid_form2->validate());
+        $_GET['landingForm']['phone'] = '87017777777';
+        $valid_form3 = new LandingForm();
+        $valid_form3->load();
+        $this->assertTrue($valid_form3->validate());
+        unset($_GET['landingForm']);
+        $_GET['landingForm']['email'] = 'glmeist@gmail.com';
+        $valid_form4 = new LandingForm();
+        $valid_form4->load();
+        $this->assertTrue($valid_form4->validate());
     }
 
     public function testSendAndSave() {

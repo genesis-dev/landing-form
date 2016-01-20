@@ -8,6 +8,11 @@ $config = [
             "phone" => function($str, $fields, $validators) {
                 return !empty($str) && preg_match('/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/', $str);
             },
+            "special_validators" => [
+                "required" => function($fields, $validators) {
+                    return empty($fields['email']['value']) || empty($fields['phone']['value']);
+                },
+            ],
         ],
         "exclude" => [],
     ],
