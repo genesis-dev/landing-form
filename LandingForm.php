@@ -102,6 +102,12 @@ class LandingForm {
      */
     public function validate() {
         $this->errors["validator"] = [];
+
+        if (empty($this->fields)) {
+            $this->errors["validator"][] = "Form is empty!";
+            return false;
+        }
+
         foreach($this->fields as $key=>$field) {
             if (isset($this->siteConfig['validators'][$key])) {
                 $validator = $this->siteConfig['validators'][$key];
@@ -109,8 +115,7 @@ class LandingForm {
                     $this->errors["validator"][] = $key;
             }
         }
-        if (empty($this->fields))
-            $this->errors["validator"][] = "Form is empty!";
+
         if (!empty($this->errors["validator"]))
             return false;
         unset($this->errors["validator"]);
