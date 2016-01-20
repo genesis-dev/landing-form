@@ -3,10 +3,14 @@ $config = [
     "defaults" => [
         "validators" => [
             "email" => function($str, $fields, $validators) {
-                return !empty($str) && filter_var($str, FILTER_VALIDATE_EMAIL);
+                if (empty($str))
+                    return true;
+                return filter_var($str, FILTER_VALIDATE_EMAIL);
             },
             "phone" => function($str, $fields, $validators) {
-                return !empty($str) && preg_match('/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/', $str);
+                if (empty($str))
+                    return true;
+                return preg_match('/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/', $str);
             },
             "special_validators" => [
                 "required" => function($fields, $validators) {
