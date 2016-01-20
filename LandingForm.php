@@ -109,9 +109,8 @@ class LandingForm {
                     $this->errors["validator"][] = $key;
             }
         }
-        foreach ($this->siteConfig['validators']['special_validators'] as $key => $validator)
-            if (!$validator($this->fields, $this->siteConfig["validators"]))
-                $this->errors["validator"][] = $key;
+        if (empty($this->fields))
+            $this->errors["validator"][] = "Form is empty!";
         if (!empty($this->errors["validator"]))
             return false;
         unset($this->errors["validator"]);
