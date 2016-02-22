@@ -1,4 +1,4 @@
-<h2>Данные клиента</h2>
+<h2>РџРѕСЃС‚СѓРїРёР»Р° РЅРѕРІР°СЏ Р·Р°СЏРІРєР°</h2>
 <table>
     <tbody>
     <?php foreach ($this->fields as $key => $field): if((isset($this->siteConfig["include"]) && in_array($key, $this->siteConfig["include"])) || !isset($this->siteConfig["include"])): ?>
